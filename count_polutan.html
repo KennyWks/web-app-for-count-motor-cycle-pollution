@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Aplikasi Penghitung Polutan</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+    rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+    rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/business-casual.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+    <div class="container">
+      <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Hitung Polusi</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="count_polutan.html">HITUNG POLUTAN</a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="count_impact.html">HITUNG DAMPAK POLUTAN</a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="contact.html">Profil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="bg-faded p-4 my-4 text-center text-uppercase">
+      <h3>Perhitungan polusi kendaraan bermotor</h3>
+    </div>
+    <div class="bg-faded p-4 my-4">
+      <h2 class="text-center text-lg text-uppercase my-0">Pembakaran <strong>Tidak Sempurna</strong></h2>
+      <hr class="divider">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <label for="motor1tak">Jumlah Kendaraan - 2 Tak</label>
+          <input id="motor1tak" type="number" class="form-control my-1" value="0">
+          <label for="motor2tak">Jumlah Kendaraan - 4 Tak</label>
+          <input id="motor2tak" type="number" class="form-control my-1" value="0">
+          <button type="button" class="btn btn-primary" onclick="countCycle()">Hitung</button>
+        </div>
+      </div>
+      <p id="resultCycle" class="mt-2 text-center"></p>
+    </div>
+
+    <div class="container">
+      <div class="bg-faded p-4 my-4">
+        <h2 class="text-center text-lg text-uppercase my-0"><strong>Polusi</strong> Udara</h2>
+        <hr class="divider">
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <label for="numb">Jumlah BBM (Liter)</label>
+            <input id="numb" type="number" class="form-control my-1" value="0">
+            <button type="button" class="btn btn-primary" onclick="countPolutonBBM()">Hitung</button>
+          </div>
+        </div>
+        <p id="bbm" class="mt-2 text-center"></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="bg-faded p-4 my-4">
+        <h2 class="text-center text-lg text-uppercase my-0">
+          <strong>Polusi</strong> dalam kecepatan minimum
+        </h2>
+        <hr class="divider">
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <label for="min">Jumlah BBM (Liter) / Jam</label>
+            <input id="min" type="number" class="form-control my-1" value="0">
+            <button type="button" class="btn btn-primary" onclick="countMin()">Hitung</button>
+          </div>
+        </div>
+        <p class="mt-2 text-center" id="resultmin"></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="bg-faded p-4 my-4">
+        <h2 class="text-center text-lg text-uppercase my-0"><strong>Polusi</strong> dalam kecepatan maksium
+        </h2>
+        <hr class="divider">
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <label for="max">Jumlah BBM (Liter) / Jam</label>
+            <input id="max" type="number" class="form-control my-1" value="0">
+            <button type="button" class="btn btn-primary" onclick="countMax()">Hitung</button>
+          </div>
+        </div>
+        <p class="mt-2 text-center" id="resultmax"></p>
+      </div>
+    </div>
+    <!-- /.container -->
+
+    <footer class="bg-faded text-center py-5">
+      <div class="container">
+        <p class="m-0">Copyright &copy; Kenny Wks</p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+<script>
+  function countCycle() {
+
+    var a, b, c, d, e, f, text, total;
+    var CO = 5.5, HC = 1.2, NOx = 0.3;
+
+    a = document.getElementById("motor1tak").value;
+    b = document.getElementById("motor2tak").value;
+    c = parseInt(a) + parseInt(b);
+    d = parseInt(c) * CO;
+    e = parseInt(c) * HC;
+    f = parseInt(c) * NOx;
+    total = d + e + f;
+
+    text = "<span>Polutan Karbon Monoksida (CO) : " + d + " Polutan Hidrokarbon (HC) : " + e + " Polutan Nitrogen Oksida (NOx) : " + f + " Polutan Keseluruhan : " + total + " " + "</span>"
+
+    document.getElementById("resultCycle").innerHTML = text;
+  }
+
+  function countPolutonBBM() {
+
+    var a, b, c, d, e, f, g, h, i, text, total;
+    var TSP = 2.2, CO = 497.7, NOx = 6.64, HC = 0.184, CO2 = 69.300, CH4 = 33, N20 = 3.2;
+
+    a = document.getElementById("numb").value;
+    d = parseInt(a) * NOx;
+    e = parseInt(a) * CO;
+    f = parseInt(a) * HC;
+
+    text = "<span>Polutan NOx : " + d + " Polutan CO : " + e + " Polutan HC : " + f + "</span>"
+    document.getElementById("bbm").innerHTML = text;
+  }
+
+  function countMin() {
+
+    var a, b, text, data;
+    var CO = 497.7, NOx = 6.64, HC = 0.184;
+    var maxTSP, minTSP, maxNOx, minNOx, maxCO, minCO, maxHC, minHC, maxCO2, minCO2, maxCH4, minCH4, maxN2O, minN2O;
+
+    b = document.getElementById("min").value;
+    minNOx = parseInt(b) * NOx;
+    minCO = parseInt(b) * CO;
+    minHC = parseInt(b) * HC;
+
+    text = "<span>Polutan NOx : " + minNOx + " Polutan CO : " + minCO + " Polutan HC : " + minHC + "</span>";
+
+    document.getElementById("resultmin").innerHTML = text;
+  }
+
+  function countMax() {
+
+    var a, b, text;
+    var CO = 497.7, NOx = 6.64, HC = 0.184;
+    var maxNOx, maxCO, maxHC;
+
+    a = document.getElementById("max").value;
+    maxNOx = parseInt(a) * NOx;
+    maxCO = parseInt(a) * CO;
+    maxHC = parseInt(a) * HC;
+
+    text = "<span>Polutan NOx : " + maxNOx + " Polutan CO : " + maxCO + " Polutan HC : " + maxHC + "</span>"
+
+    document.getElementById("resultmax").innerHTML = text;
+  }
+</script>

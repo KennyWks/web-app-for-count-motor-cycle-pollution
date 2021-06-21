@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Aplikasi Penghitung Polutan</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+    rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+    rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/business-casual.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+    <div class="container">
+      <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Hitung Polusi</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="count_polutan.html">HITUNG POLUTAN</a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="count_impact.html">HITUNG DAMPAK POLUTAN</a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="contact.html">Profil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="bg-faded p-4 my-4 text-center text-uppercase">
+      <h3>DAMPAK POLUSI/POLUTAN</h3>
+    </div>
+    <div class="bg-faded p-4 my-4">
+      <h3 class="text-center">Penyakit yang ditimbulkan</h3>
+      <hr class="divider">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <label for="numb1">Polutan Karbon Monoksida (CO)</label>
+          <input id="numb1" type="number" class="form-control my-1" value="0">
+          <label for="numb2">Polutan Hidrokarbon (HC)</label>
+          <input id="numb2" type="number" class="form-control my-1" value="0">
+          <label for="numb3">Polutan Nitrogen Oksida (NOx)</label>
+          <input id="numb3" type="number" class="form-control my-1" value="0">
+          <button type="button" class="btn btn-primary" onclick="countPM()">Check</button>
+          <p id="result1" style="text-align:justify;" class="mt-2"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="bg-faded p-4 my-4">
+        <h3 class="text-center">Rekomendasi tindakan atas polutan</h3>
+        <hr class="divider">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <label>Jumlah PM (Mis : 2,5 miligram/meter) </label>
+            <input id="pm" type="number" class="form-control my-1" value="0">
+            <button type="button" class="btn btn-primary" onclick="checkRecomended()">Check</button>
+            <p id="result2" style="text-align:justify;" class="mt-2"></p>
+          </div>
+        </div>
+      </div>
+      <!-- container -->
+
+      <footer class="bg-faded text-center py-5">
+        <div class="container">
+          <p class="m-0">Copyright &copy; Kenny Wks</p>
+        </div>
+      </footer>
+
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+<script>
+  function countPM() {
+    var CO, HC, NOx, text, hasil;
+
+    CO = document.getElementById("numb1").value;
+    HC = document.getElementById("numb2").value;
+    NOx = document.getElementById("numb3").value;
+
+
+    if (isNaN(CO) || isNaN(HC) || isNaN(NOx)) {
+      text = "Masukan Harus berupa Angka";
+    }
+
+    else if ((CO) > (HC && NOx)) {
+
+      hasil = "Peluang Penyakit yang mungkin ditimbulkan yaitu kelainan histopatologis pada Manusia dan Hewan, sedangkan pada Tumbuhan terjadi Ganguan pada Ekosistem";
+    }
+
+
+    else if ((NOx) > (CO && HC)) {
+
+      hasil = "Peluang Penyakit yang mungkin ditimbulkan Keracunan Akut/infeksi saluran pernafasan, Sesak Nafas, Batuk, dan Asama pada manusia dan hewan Sedangkan pada Tumbuhan terjadi Kerusakan jaringan daun sehingga mengganggu proses fotosintesis";
+    }
+
+
+    else if ((HC) > (CO && NOx)) {
+
+      hasil = "Peluang Penyakit yang mungkin ditimbulkan yaitu Munculnya kanker pada organ manusia yaitu paru-paru dan kegagalan fungsi organ khusunya paru-paru bagi hewan, sedangkan pada Tumbuhan akan menjadi rusak karena membuat layu daun";
+    }
+
+
+    else {
+
+      hasil = "Input Tidak Valid";
+    }
+
+    text = hasil;
+
+    document.getElementById("result1").innerHTML = text;
+  }
+
+  function checkRecomended() {
+    var ambang, text, hasil;
+    var g = 65;
+    var who = 25;
+    ambang = document.getElementById("pm").value;
+
+
+    if (ambang <= who) {
+      hasil = "Masih Dalam Ambang batas WHO (Masih tahap wajar/belum berpengaruh pada tubuh)";
+    }
+
+
+    else if (ambang <= g) {
+      hasil = "Masih Dalam Ambang batas Nasional Pemerintah (Masih tahap wajar/belum berpengaruh pada tubuh)";
+    }
+
+
+    else if (ambang > who && g) {
+      hasil = "Melebihi ambang batas! segera evakuasi (Menyebabkan Kematian)";
+    }
+
+    else {
+      hasil = "Input Tidak Valid"
+    }
+
+    text = "Rekomendasi : " + hasil;
+    document.getElementById("result2").innerHTML = text;
+  }
+
+</script>
